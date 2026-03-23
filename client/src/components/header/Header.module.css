@@ -1,0 +1,115 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: #fff;
+
+}
+
+/* Logo stili */
+.container a:first-child {
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+
+/* Qidiruv maydoni */
+.form {
+  flex: 0 1 400px;
+}
+
+.form input {
+  width: 100%;
+  padding: 8px 20px;
+  border: 2px solid #000;
+  /* Rasmda qora hoshiya ko'rinyapti */
+  border-radius: 25px;
+  /* Dumaloq shakl */
+  outline: none;
+  font-size: 14px;
+}
+
+/* O'ng tarafdagi ikonka-linklar */
+.links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.links a {
+  color: #333;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+/* O'ng tarafdagi ikonka-linklar */
+.links a {
+  color: #333;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  /* Effekt silliq chiqishi uchun */
+}
+
+/* Hover effekti - aynan ikonka (svg) uchun */
+.links a:hover svg {
+  color: #ff4757 !important;
+  /* Test uchun yorqin rang */
+  transform: scale(1.2);
+  /* Kattalashish effekti */
+}
+
+/* Logo uchun ham hover */
+.container a:first-child:hover {
+  opacity: 0.7;
+}
+
+/* Hover effekti */
+.links a:hover {
+  color: #000;
+  opacity: 0.7;
+}
+
+.cartIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #ff4757;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  padding: 2px;
+}
+
+/* Mobil qurilmalar uchun */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px 15px;
+  }
+
+  .form {
+    flex: 0 1 200px;
+    /* Ekran kichraysa input ham kichrayadi */
+  }
+}
