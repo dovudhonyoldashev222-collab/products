@@ -10,8 +10,8 @@ import Wishlist from "./pages/wishlist/Wishlist";
 const App = () => {
   const [productsData, setProductsData] = useState([]); //  ma'lumotlar
   const [cartData, setCartData] = useState([]);         // Savatcha ma'lumotlari
-  const [showData, setShowData] = useState([]);       // Ekranda ko'rinadigan ma'mulotlar
   const [category, setCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");     // Qidiruv matni
   const [wishlistData, setWishlistData] = useState([]); // Wishlist ma'lumotlari
 
   // Kategoriyalarni yig'ish
@@ -25,30 +25,35 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData();
-      setProductsData(data);
-      setShowData(data);
+      setProductsData(data || []);
     };
     fetchData();
   }, []);
 
-  // Kategoriya bo'yicha filtrlash
-  useEffect(() => {
-    if (category === "all") {
-      setShowData(productsData);
-    } else {
-      const filtered = productsData.filter(
+  // Ekranda ko'rinadigan ma'lumotlarni hisoblash (useMemo orqali)
+  const showData = useMemo(() => {
+    let filtered = productsData;
+
+    // 1. Kategoriya bo'yicha filtrlash
+    if (category !== "all") {
+      filtered = filtered.filter(
         (item) => item.category.toLowerCase() === category.toLowerCase()
       );
-      setShowData(filtered);
     }
-  }, [category, productsData]);
+
+    // 2. Qidiruv bo'yicha filtrlash
+    if (searchTerm) {
+      filtered = filtered.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filtered;
+  }, [productsData, category, searchTerm]);
 
   // QIDIRUV FUNKSIYASI
   const handleSearch = (text) => {
-    const filtered = productsData.filter((item) =>
-      item.title.toLowerCase().includes(text.toLowerCase())
-    );
-    setShowData(filtered);
+    setSearchTerm(text);
   };
 
   const addToCart = (item) => {

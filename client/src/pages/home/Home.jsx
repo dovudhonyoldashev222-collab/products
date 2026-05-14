@@ -1,24 +1,23 @@
 import styles from './Home.module.css';
 import Categories from "./Categories";
 import Product from "./Product";
-import { useEffect, useState } from 'react';
 
 const Home = ({ showData, categories, category, setCategory, addToCart, addToWishlist, wishlistData }) => {
 
   return (
     <div>
-      <Categories 
-        categories={categories} 
-        category={category} 
-        setCategory={setCategory} 
+      <Categories
+        categories={categories}
+        category={category}
+        setCategory={setCategory}
       />
       <div className={styles.container}>
         {showData?.length > 0 ? (
           showData.map((item) => (
-            <Product 
-              key={item.id} 
-              item={item} 
-              addToCart={addToCart} 
+            <Product
+              key={item.id}
+              item={item}
+              addToCart={addToCart}
               addToWishlist={addToWishlist}
               isFavorite={wishlistData?.some(fav => fav.id === item.id)}
             />
